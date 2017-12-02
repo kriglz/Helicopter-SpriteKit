@@ -14,6 +14,7 @@
 		890DF3D61FD0CFCF003BAA7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890DF3D51FD0CFCF003BAA7B /* Assets.xcassets */; };
 		890DF3D91FD0CFCF003BAA7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890DF3D71FD0CFCF003BAA7B /* LaunchScreen.storyboard */; };
 		895101EE1FD2449A006C9C24 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895101ED1FD2449A006C9C24 /* Constants.swift */; };
+		895101F01FD3689D006C9C24 /* HelicopterSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895101EF1FD3689D006C9C24 /* HelicopterSprite.swift */; };
 		8951CB801FD230280046C45C /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951CB7F1FD230280046C45C /* BackgroundNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		890DF3D81FD0CFCF003BAA7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		890DF3DA1FD0CFCF003BAA7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		895101ED1FD2449A006C9C24 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		895101EF1FD3689D006C9C24 /* HelicopterSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelicopterSprite.swift; sourceTree = "<group>"; };
 		8951CB7F1FD230280046C45C /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 		8951CB7D1FD222520046C45C /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				895101EF1FD3689D006C9C24 /* HelicopterSprite.swift */,
 				8951CB7F1FD230280046C45C /* BackgroundNode.swift */,
 			);
 			path = Sprites;
@@ -179,6 +182,7 @@
 			files = (
 				895101EE1FD2449A006C9C24 /* Constants.swift in Sources */,
 				890DF3CF1FD0CFCF003BAA7B /* GameScene.swift in Sources */,
+				895101F01FD3689D006C9C24 /* HelicopterSprite.swift in Sources */,
 				8951CB801FD230280046C45C /* BackgroundNode.swift in Sources */,
 				890DF3D11FD0CFCF003BAA7B /* GameViewController.swift in Sources */,
 				890DF3C91FD0CFCF003BAA7B /* AppDelegate.swift in Sources */,
