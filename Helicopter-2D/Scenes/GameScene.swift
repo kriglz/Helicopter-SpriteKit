@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
-    
+    private let helicopterNode = HelicopterSprite.newInstance()
     
     
     
@@ -27,6 +27,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Setting up and adding to the scene background.
         backgroundNode.setup(size: size)
         addChild(backgroundNode)
+        
+        //Adding helicopter to the scene
+        helicopterNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        helicopterNode.zPosition = 4
+        addChild(helicopterNode)
         
         //Adding WorldFrame
         var worldFrame = frame
