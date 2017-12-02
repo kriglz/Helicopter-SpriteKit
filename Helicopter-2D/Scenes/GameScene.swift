@@ -13,7 +13,9 @@ class GameScene: SKScene {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 0.5
+    private var thunderDropSpawnRate : TimeInterval = 1
+    ///The SKTexture of the thunder.
+    let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
     
     override func sceneDidLoad() {
@@ -26,7 +28,6 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -47,8 +48,26 @@ class GameScene: SKScene {
         // Update the Spawn Timer
         currentThunderDropSpawnTime += dt
         
+        //Spawns new thunder every spawnThunderRate time
+        if currentThunderDropSpawnTime > thunderDropSpawnRate {
+            currentThunderDropSpawnTime = 0
+            spawnThunders()
+        }
         
         self.lastUpdateTime = currentTime
+    }
+    
+    //Creates thunders.
+    private func spawnThunders(){
+        let thunder = SKSpriteNode(texture: thunderTexture)
+        thunder.physicsBody = SKPhysicsBody(texture: thunderTexture, size: thunder.size)
+        
+        let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
+        let yPosition = size.height - thunder.size.height
+        
+        thunder.position = CGPoint(x: xPosition, y: yPosition)
+        
+        addChild(thunder)
     }
    
 }
