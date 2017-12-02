@@ -14,7 +14,10 @@ public class BackgroundNode: SKNode {
         let yPosition: CGFloat = size.height * 0.10
         let startPoint = CGPoint(x: 0, y: yPosition)
         let endPoint = CGPoint(x: size.width, y: yPosition)
+        
         physicsBody = SKPhysicsBody(edgeFrom: startPoint, to: endPoint)
         physicsBody?.restitution = 0.3
+        physicsBody?.categoryBitMask = FloorCategory
+        physicsBody?.contactTestBitMask = ThunderDropCategory
     }
 }

@@ -13,6 +13,7 @@
 		890DF3D41FD0CFCF003BAA7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890DF3D21FD0CFCF003BAA7B /* Main.storyboard */; };
 		890DF3D61FD0CFCF003BAA7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890DF3D51FD0CFCF003BAA7B /* Assets.xcassets */; };
 		890DF3D91FD0CFCF003BAA7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 890DF3D71FD0CFCF003BAA7B /* LaunchScreen.storyboard */; };
+		895101EE1FD2449A006C9C24 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895101ED1FD2449A006C9C24 /* Constants.swift */; };
 		8951CB801FD230280046C45C /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951CB7F1FD230280046C45C /* BackgroundNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		890DF3D51FD0CFCF003BAA7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		890DF3D81FD0CFCF003BAA7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		890DF3DA1FD0CFCF003BAA7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		895101ED1FD2449A006C9C24 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8951CB7F1FD230280046C45C /* BackgroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 		8951CB7B1FD2201D0046C45C /* Supporting fails */ = {
 			isa = PBXGroup;
 			children = (
+				895101ED1FD2449A006C9C24 /* Constants.swift */,
 				890DF3D21FD0CFCF003BAA7B /* Main.storyboard */,
 				890DF3D51FD0CFCF003BAA7B /* Assets.xcassets */,
 				890DF3D71FD0CFCF003BAA7B /* LaunchScreen.storyboard */,
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895101EE1FD2449A006C9C24 /* Constants.swift in Sources */,
 				890DF3CF1FD0CFCF003BAA7B /* GameScene.swift in Sources */,
 				8951CB801FD230280046C45C /* BackgroundNode.swift in Sources */,
 				890DF3D11FD0CFCF003BAA7B /* GameViewController.swift in Sources */,

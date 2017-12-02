@@ -9,14 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
-    private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 1
+    private var currentThunderDropSpawnTime : TimeInterval = 1
+    private var thunderDropSpawnRate : TimeInterval = 0.5
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
+    
+    
+    
     
     override func sceneDidLoad() {
         self.lastUpdateTime = 0
@@ -24,7 +27,21 @@ class GameScene: SKScene {
         //Setting up and adding to the scene background.
         backgroundNode.setup(size: size)
         addChild(backgroundNode)
+        
+        //Adding WorldFrame
+        var worldFrame = frame
+        worldFrame.origin.x = -100
+        worldFrame.origin.y = -100
+        worldFrame.size.height += 200
+        worldFrame.size.width += 200
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
+        self.physicsBody?.categoryBitMask = WorldCategory
+        self.physicsWorld.contactDelegate = self
+
     }
+    
+    
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,6 +78,8 @@ class GameScene: SKScene {
     private func spawnThunders(){
         let thunder = SKSpriteNode(texture: thunderTexture)
         thunder.physicsBody = SKPhysicsBody(texture: thunderTexture, size: thunder.size)
+        thunder.physicsBody?.categoryBitMask = ThunderDropCategory
+        thunder.physicsBody?.contactTestBitMask = FloorCategory | WorldCategory
         
         let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
         let yPosition = size.height - thunder.size.height
@@ -70,4 +89,24 @@ class GameScene: SKScene {
         addChild(thunder)
     }
    
+    //Contact delegate
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == ThunderDropCategory {
+            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+            contact.bodyA.node?.physicsBody?.contactTestBitMask = 0
+        } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
+            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+            contact.bodyB.node?.physicsBody?.contactTestBitMask = 0
+        }
+        
+        if contact.bodyA.categoryBitMask == WorldCategory {
+            contact.bodyB.node?.removeFromParent()
+            contact.bodyB.node?.physicsBody = nil
+            contact.bodyB.node?.removeAllActions()
+        } else if contact.bodyB.categoryBitMask == WorldCategory {
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyA.node?.physicsBody = nil
+            contact.bodyA.node?.removeAllActions()
+        }
+    }
 }
