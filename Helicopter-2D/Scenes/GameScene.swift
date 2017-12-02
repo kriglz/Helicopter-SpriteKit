@@ -13,7 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 0.5
+    private var thunderDropSpawnRate : TimeInterval = 1
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
@@ -38,6 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
         self.physicsBody?.categoryBitMask = WorldCategory
         self.physicsWorld.contactDelegate = self
+        self.physicsWorld.gravity = CGVector.init(dx: 0.1, dy: -1.0)
 
     }
     
@@ -85,6 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let yPosition = size.height
         
         thunder.position = CGPoint(x: xPosition, y: yPosition)
+        thunder.zPosition = 2
         
         addChild(thunder)
     }
