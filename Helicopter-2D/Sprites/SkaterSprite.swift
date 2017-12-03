@@ -10,7 +10,15 @@ import SpriteKit
 
 public class SkaterSprite: SKSpriteNode {
     
-    //Speed of the skster.
+    ///Stromg which defines walking action.
+    private let walkingActionKey = "action_walking"
+    private let walkFrame = [
+        SKTexture(imageNamed: "skater1"),
+        SKTexture(imageNamed: "skater2"),
+        SKTexture(imageNamed: "skater3")
+    ]
+    
+    //Speed of the skater.
     private let movementSpeed: CGFloat = 50
     
     
