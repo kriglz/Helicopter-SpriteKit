@@ -29,7 +29,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(backgroundNode)
         
         //Adding helicopter to the scene
-        helicopterNode.position = CGPoint(x: frame.midX, y: frame.midY)
+//        helicopterNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        helicopterNode.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
         helicopterNode.zPosition = 4
         addChild(helicopterNode)
         
@@ -51,11 +52,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
+        
+        if let touchPoint = touchPoint {
+            helicopterNode.setDestination(destination: touchPoint)
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
         
+        if let touchPoint = touchPoint{
+            helicopterNode.setDestination(destination: touchPoint)
+        }
     }
+    
+    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -76,6 +88,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             currentThunderDropSpawnTime = 0
             spawnThunders()
         }
+        
+        //Updates helicopter
+        helicopterNode.update(deltaTime: dt)
         
         self.lastUpdateTime = currentTime
     }
