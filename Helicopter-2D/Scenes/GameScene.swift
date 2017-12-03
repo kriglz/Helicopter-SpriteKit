@@ -14,11 +14,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
     private var thunderDropSpawnRate : TimeInterval = 2
-    private let portEdgeMargin: CGFloat = 25.0
+    private let itemEdgeMargin: CGFloat = 25.0
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
     private let helicopterNode = HelicopterSprite.newInstance()
+    private var itemNode: ItemSprite!
     private var skaterNode: SkaterSprite!
     
     
@@ -39,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spawnSkater()
         
         //Adding port to the scene.
-        spawnPort()
+        spawnItem()
         
         //Adding WorldFrame
         var worldFrame = frame
@@ -99,6 +100,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Updates helicopter
         helicopterNode.update(deltaTime: dt)
         
+        //Updates skater movement
+        skaterNode.update(deltaTime: dt, itemLocation: itemNode?.position ?? CGPoint.zero)
+        
         self.lastUpdateTime = currentTime
     }
     
@@ -122,6 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Creates skater.
     func spawnSkater(){
+        //Checks if the skater already exists.
         if let currentSkater = skaterNode, children.contains(currentSkater){
             skaterNode.removeFromParent()
             skaterNode.removeAllActions()
@@ -129,21 +134,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         skaterNode = SkaterSprite.newInstance()
-        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: helicopterNode.position.y - 5 )//size.height * 0.1 + 1)
+        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.1 + 1)
 
         addChild(skaterNode)
     }
     
-    //Creates port.
-    func spawnPort(){
-        let port = PortalSprite.newInstance()
+    //Creates item.
+    func spawnItem(){
+        //Checks if the item already exists.
+        if let currentItem = itemNode, children.contains(currentItem){
+            itemNode.removeFromParent()
+            itemNode.removeAllActions()
+            itemNode.physicsBody = nil
+        }
+        
+        let item = ItemSprite.newInstance()
         var randomPosition: CGFloat = CGFloat(arc4random())
-        randomPosition = randomPosition.truncatingRemainder(dividingBy: (size.width - portEdgeMargin * 2))
-        randomPosition += portEdgeMargin
+        randomPosition = randomPosition.truncatingRemainder(dividingBy: (size.width - itemEdgeMargin * 2))
+        randomPosition += itemEdgeMargin
         
-        port.position = CGPoint(x: randomPosition, y: size.height * 0.1)
+        item.position = CGPoint(x: randomPosition, y: helicopterNode.position.y - 5) //size.height * 0.1)
         
-        addChild(port)
+        addChild(item)
     }
     
     
@@ -158,9 +170,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         
-        //Checks if port was hit
-        if contact.bodyA.categoryBitMask == PortalCategory || contact.bodyB.categoryBitMask == PortalCategory {
-            handlePortCollision(contact: contact)
+        //Checks if item was hit
+        if contact.bodyA.categoryBitMask == ItemCategory || contact.bodyB.categoryBitMask == ItemCategory {
+            handleItemCollision(contact: contact)
             return
         }
         
@@ -204,11 +216,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     //Finds put with which body ports collided.
-    func handlePortCollision(contact: SKPhysicsContact){
+    func handleItemCollision(contact: SKPhysicsContact){
         var otherBody: SKPhysicsBody
         var portBody: SKPhysicsBody
         
-        if contact.bodyA.categoryBitMask == PortalCategory {
+        if contact.bodyA.categoryBitMask == ItemCategory {
             otherBody = contact.bodyB
             portBody = contact.bodyA
         } else {
@@ -221,16 +233,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case SkaterCategory:
             //TODO increment points
             print("Disappear skater")
-            otherBody.node?.removeFromParent()
-            otherBody.node?.physicsBody = nil
             
-            spawnSkater()
             fallthrough //picks the following case (doesn't matter if that matches or not)
             
         case WorldCategory:
             portBody.node?.removeFromParent()
             portBody.node?.physicsBody = nil
-            spawnPort()
+            spawnItem()
             
         default:
             print("something else touched port")

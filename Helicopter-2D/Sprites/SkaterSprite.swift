@@ -9,10 +9,16 @@
 import SpriteKit
 
 public class SkaterSprite: SKSpriteNode {
+    
+    //Speed of the skster.
+    private let movementSpeed: CGFloat = 100
+    
+    
     public static func newInstance() -> SkaterSprite {
         
         //Initializing skater sprite form the image
         let skater = SkaterSprite(imageNamed: "skater")
+        
 
         skater.zPosition = 5
         skater.physicsBody = SKPhysicsBody(rectangleOf: skater.size) //(circleOfRadius: skaterSprite.size.width / 2)
@@ -24,7 +30,15 @@ public class SkaterSprite: SKSpriteNode {
         return skater
     }
     
-    public func update(deltaTime: TimeInterval){
-        
+    public func update(deltaTime: TimeInterval, itemLocation: CGPoint){
+        if itemLocation.x < position.x {
+            //Item is in the left
+            position.x -= movementSpeed * CGFloat(deltaTime)
+            xScale = -1
+        } else {
+            //Item is in the right
+            position.x += movementSpeed * CGFloat(deltaTime)
+            xScale = 1
+        }
     }
 }
