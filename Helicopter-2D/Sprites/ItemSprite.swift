@@ -17,6 +17,7 @@ public class ItemSprite: SKSpriteNode{
         item.physicsBody?.contactTestBitMask = WorldCategory | ThunderDropCategory | SkaterCategory
 //        item.physicsBody?.isDynamic = false
 
+        
         item.zPosition = 5
         
         return item

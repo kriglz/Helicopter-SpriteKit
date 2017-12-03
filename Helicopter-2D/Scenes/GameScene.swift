@@ -13,7 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 2
+    private var thunderDropSpawnRate : TimeInterval = 5
     private let itemEdgeMargin: CGFloat = 25.0
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
@@ -41,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Adding port to the scene.
         spawnItem()
+        print(itemNode.position)
         
         //Adding WorldFrame
         var worldFrame = frame
@@ -99,9 +100,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Updates helicopter
         helicopterNode.update(deltaTime: dt)
-        
+
         //Updates skater movement
-        skaterNode.update(deltaTime: dt, itemLocation: itemNode?.position ?? CGPoint.zero)
+        skaterNode.update(deltaTime: dt, itemLocation: itemNode.position)
+        
+    
         
         self.lastUpdateTime = currentTime
     }
@@ -148,14 +151,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             itemNode.physicsBody = nil
         }
         
-        let item = ItemSprite.newInstance()
+        itemNode = ItemSprite.newInstance()
         var randomPosition: CGFloat = CGFloat(arc4random())
         randomPosition = randomPosition.truncatingRemainder(dividingBy: (size.width - itemEdgeMargin * 2))
         randomPosition += itemEdgeMargin
         
-        item.position = CGPoint(x: randomPosition, y: size.height)
+        itemNode.position = CGPoint(x: randomPosition, y: size.height * 0.15)
         
-        addChild(item)
+        addChild(itemNode)
     }
     
     
