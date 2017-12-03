@@ -13,7 +13,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 1
+    private var thunderDropSpawnRate : TimeInterval = 2
+    private let portEdgeMargin: CGFloat = 25.0
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
@@ -36,6 +37,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Adding skater to the scene.
         spawnSkater()
+        
+        //Adding port to the scene.
+        spawnPort()
         
         //Adding WorldFrame
         var worldFrame = frame
@@ -130,7 +134,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(skaterNode)
     }
     
-    
+    //Creates port.
+    func spawnPort(){
+        let port = PortalSprite.newInstance()
+        var randomPosition: CGFloat = CGFloat(arc4random())
+        randomPosition = randomPosition.truncatingRemainder(dividingBy: (size.width - portEdgeMargin * 2))
+        randomPosition += portEdgeMargin
+        
+        port.position = CGPoint(x: randomPosition, y: size.height * 0.1)
+        
+        addChild(port)
+    }
     
     
    
@@ -143,6 +157,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node?.physicsBody?.collisionBitMask = 0
         }
         
+        
+        //Checks if port was hit
+        if contact.bodyA.categoryBitMask == PortalCategory || contact.bodyB.categoryBitMask == PortalCategory {
+            handlePortCollision(contact: contact)
+            return
+        }
+        
+        //Checks if skater was hit.
         if contact.bodyA.categoryBitMask == SkaterCategory || contact.bodyB.categoryBitMask == SkaterCategory {
             handleSkaterCollision(contact: contact)
             return
@@ -178,6 +200,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             spawnSkater()
         default:
             print("Something hit skater")
+        }
+    }
+    
+    //Finds put with which body ports collided.
+    func handlePortCollision(contact: SKPhysicsContact){
+        var otherBody: SKPhysicsBody
+        var portBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask == PortalCategory {
+            otherBody = contact.bodyB
+            portBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            portBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+            
+        case SkaterCategory:
+            //TODO increment points
+            print("Disappear skater")
+            fallthrough //picks the following case (doesn't matter if that matches or not)
+            
+        case WorldCategory:
+            portBody.node?.removeFromParent()
+            portBody.node?.physicsBody = nil
+            spawnPort()
+            
+        default:
+            print("something else touched port")
         }
     }
 }

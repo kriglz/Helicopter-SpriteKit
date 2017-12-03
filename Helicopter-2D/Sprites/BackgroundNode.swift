@@ -20,18 +20,18 @@ public class BackgroundNode: SKNode {
         physicsBody?.categoryBitMask = FloorCategory
         physicsBody?.contactTestBitMask = ThunderDropCategory
         
-        let skyNode = SKShapeNode(rect: CGRect(origin: CGPoint(), size: size))
-        skyNode.fillColor = SKColor(red: 0, green: 0, blue: 128/255, alpha: 1.0)
-        skyNode.strokeColor = SKColor.clear
-        skyNode.zPosition = 0
+        let sky = SKShapeNode(rect: CGRect(origin: CGPoint(), size: size))
+        sky.fillColor = SKColor(red: 0, green: 0, blue: 128/255, alpha: 1.0)
+        sky.strokeColor = SKColor.clear
+        sky.zPosition = 0
         
         let groundSize = CGSize(width: size.width, height: size.height * 0.25)
-        let groundNode = SKShapeNode(rect: CGRect(origin: CGPoint(), size: groundSize))
-        groundNode.fillColor = SKColor(red: 0.99, green: 0.92, blue: 0.55, alpha: 1.0)
-        groundNode.strokeColor = SKColor.clear
-        groundNode.zPosition = 1
+        let ground = SKShapeNode(rect: CGRect(origin: CGPoint(), size: groundSize))
+        ground.fillColor = SKColor(red: 0.99, green: 0.92, blue: 0.55, alpha: 1.0)
+        ground.strokeColor = SKColor.clear
+        ground.zPosition = 1
         
-        addChild(skyNode)
-        addChild(groundNode)
+        addChild(sky)
+        addChild(ground)
     }
 }

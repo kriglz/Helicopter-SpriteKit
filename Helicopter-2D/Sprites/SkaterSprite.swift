@@ -12,16 +12,16 @@ public class SkaterSprite: SKSpriteNode {
     public static func newInstance() -> SkaterSprite {
         
         //Initializing skater sprite form the image
-        let skaterSprite = SkaterSprite(imageNamed: "skater")
+        let skater = SkaterSprite(imageNamed: "skater")
 
-        skaterSprite.zPosition = 5
-        skaterSprite.physicsBody = SKPhysicsBody(rectangleOf: skaterSprite.size) //(circleOfRadius: skaterSprite.size.width / 2)
+        skater.zPosition = 5
+        skater.physicsBody = SKPhysicsBody(rectangleOf: skater.size) //(circleOfRadius: skaterSprite.size.width / 2)
         
         //Adding contactTestBitMask for skater
-        skaterSprite.physicsBody?.categoryBitMask = SkaterCategory
-        skaterSprite.physicsBody?.contactTestBitMask = ThunderDropCategory | WorldCategory
+        skater.physicsBody?.categoryBitMask = SkaterCategory
+        skater.physicsBody?.contactTestBitMask = ThunderDropCategory | WorldCategory
         
-        return skaterSprite
+        return skater
     }
     
     public func update(deltaTime: TimeInterval){
