@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
     private let helicopterNode = HelicopterSprite.newInstance()
+    private var skaterNode: SkaterSprite!
     
     
     
@@ -28,11 +29,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundNode.setup(size: size)
         addChild(backgroundNode)
         
-        //Adding helicopter to the scene
-//        helicopterNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        //Adding helicopter to the scene.
         helicopterNode.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
         helicopterNode.zPosition = 4
         addChild(helicopterNode)
+        
+        //Adding skater to the scene.
+        spawnSkater()
         
         //Adding WorldFrame
         var worldFrame = frame
@@ -95,6 +98,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.lastUpdateTime = currentTime
     }
     
+    
+    
     //Creates thunders.
     private func spawnThunders(){
         let thunder = SKSpriteNode(texture: thunderTexture)
@@ -110,6 +115,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(thunder)
     }
+    
+    //Creates skater.
+    func spawnSkater(){
+        if let currentSkater = skaterNode, children.contains(currentSkater){
+            skaterNode.removeFromParent()
+            skaterNode.removeAllActions()
+            skaterNode.physicsBody = nil
+        }
+        
+        skaterNode = SkaterSprite.newInstance()
+        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: helicopterNode.position.y - 250)
+
+        addChild(skaterNode)
+    }
+    
+    
+    
+    
    
     //Contact delegate
     func didBegin(_ contact: SKPhysicsContact) {
