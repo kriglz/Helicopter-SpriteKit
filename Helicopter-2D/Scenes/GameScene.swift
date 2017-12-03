@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         skaterNode = SkaterSprite.newInstance()
-        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.1 + 1)
+        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: helicopterNode.position.y - 5 )//size.height * 0.1 + 1)
 
         addChild(skaterNode)
     }
@@ -221,6 +221,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case SkaterCategory:
             //TODO increment points
             print("Disappear skater")
+            otherBody.node?.removeFromParent()
+            otherBody.node?.physicsBody = nil
+            
+            spawnSkater()
             fallthrough //picks the following case (doesn't matter if that matches or not)
             
         case WorldCategory:
