@@ -10,7 +10,7 @@ import SpriteKit
 
 public class ItemSprite: SKSpriteNode{
     public static func newInstance() -> ItemSprite {
-        let item = ItemSprite(imageNamed: "hat")
+        let item = ItemSprite(imageNamed: "item\((arc4random()%3)+1)")
         
         item.physicsBody = SKPhysicsBody(rectangleOf: item.size)
         item.physicsBody?.categoryBitMask = ItemCategory
