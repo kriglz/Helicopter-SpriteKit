@@ -153,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomPosition = randomPosition.truncatingRemainder(dividingBy: (size.width - itemEdgeMargin * 2))
         randomPosition += itemEdgeMargin
         
-        item.position = CGPoint(x: randomPosition, y: helicopterNode.position.y - 5) //size.height * 0.1)
+        item.position = CGPoint(x: randomPosition, y: size.height)
         
         addChild(item)
     }

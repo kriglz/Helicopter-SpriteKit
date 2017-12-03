@@ -11,7 +11,7 @@ import SpriteKit
 public class SkaterSprite: SKSpriteNode {
     
     //Speed of the skster.
-    private let movementSpeed: CGFloat = 100
+    private let movementSpeed: CGFloat = 50
     
     
     public static func newInstance() -> SkaterSprite {
@@ -21,7 +21,7 @@ public class SkaterSprite: SKSpriteNode {
         
 
         skater.zPosition = 5
-        skater.physicsBody = SKPhysicsBody(rectangleOf: skater.size) //(circleOfRadius: skaterSprite.size.width / 2)
+        skater.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: skater.size.width - 20, height: skater.size.height)) //(circleOfRadius: skaterSprite.size.width / 2)
         
         //Adding contactTestBitMask for skater
         skater.physicsBody?.categoryBitMask = SkaterCategory
@@ -34,11 +34,11 @@ public class SkaterSprite: SKSpriteNode {
         if itemLocation.x < position.x {
             //Item is in the left
             position.x -= movementSpeed * CGFloat(deltaTime)
-            xScale = -1
+            xScale = 1
         } else {
             //Item is in the right
             position.x += movementSpeed * CGFloat(deltaTime)
-            xScale = 1
+            xScale = -1
         }
     }
 }
