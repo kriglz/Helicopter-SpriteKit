@@ -18,7 +18,7 @@ public class SkaterSprite: SKSpriteNode {
         skaterSprite.physicsBody = SKPhysicsBody(rectangleOf: skaterSprite.size) //(circleOfRadius: skaterSprite.size.width / 2)
         
         //Adding contactTestBitMask for skater
-        skaterSprite.physicsBody?.categoryBitMask = skaterCategory
+        skaterSprite.physicsBody?.categoryBitMask = SkaterCategory
         skaterSprite.physicsBody?.contactTestBitMask = ThunderDropCategory | WorldCategory
         
         return skaterSprite

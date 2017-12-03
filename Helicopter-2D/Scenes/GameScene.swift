@@ -125,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         skaterNode = SkaterSprite.newInstance()
-        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: helicopterNode.position.y - 250)
+        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.1 + 1)
 
         addChild(skaterNode)
     }
@@ -138,13 +138,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == ThunderDropCategory {
             contact.bodyA.node?.physicsBody?.collisionBitMask = 0
-//            contact.bodyA.node?.physicsBody?.contactTestBitMask = 0
         
         } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
             contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-//            contact.bodyB.node?.physicsBody?.contactTestBitMask = 0
         }
         
+        if contact.bodyA.categoryBitMask == SkaterCategory || contact.bodyB.categoryBitMask == SkaterCategory {
+            handleSkaterCollision(contact: contact)
+            return
+        }
         
         if contact.bodyA.categoryBitMask == WorldCategory {
             contact.bodyB.node?.removeFromParent()
@@ -156,6 +158,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyA.node?.removeAllActions()
             contact.bodyA.node?.physicsBody = nil
             
+        }
+    }
+    
+    //Finds out with which body skater collided.
+    func handleSkaterCollision(contact: SKPhysicsContact){
+        var otherBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask == SkaterCategory {
+            otherBody = contact.bodyB
+        } else {
+            otherBody = contact.bodyA
+        }
+        
+        switch otherBody.categoryBitMask {
+        case ThunderDropCategory:
+            print("Thunder hit the skater")
+        case WorldCategory:
+            spawnSkater()
+        default:
+            print("Something hit skater")
         }
     }
 }
