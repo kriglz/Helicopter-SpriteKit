@@ -30,6 +30,11 @@ public class SkaterSprite: SKSpriteNode {
     private var timeSinceLastHit: TimeInterval = 2.0
     private let maxFlailTime = 2.0
     
+    ///Int which counts how many times skater was hit by thunder.
+    private var currentThunderHits = 4
+    ///Int which defines how many times skater needs to be hit before moaning.
+    private let maxThunderHits = 4
+    
     public static func newInstance() -> SkaterSprite {
         
         //Initializing skater sprite form the image
@@ -94,7 +99,17 @@ public class SkaterSprite: SKSpriteNode {
         timeSinceLastHit = 0
         removeAction(forKey: skatingActionKey)
         
-        let selectedSFX = Int( arc4random_uniform( UInt32( skaterSFX.count)))
-        run( SKAction.playSoundFileNamed( skaterSFX[selectedSFX], waitForCompletion: true))
+        //Determines if skater needs to moan.
+        if currentThunderHits < maxThunderHits {
+            currentThunderHits += 1
+            return
+        }
+        
+        if action(forKey: "action_sound_effect") == nil {
+            currentThunderHits = 0
+            
+            let selectedSFX = Int( arc4random_uniform( UInt32( skaterSFX.count)))
+            run( SKAction.playSoundFileNamed( skaterSFX[selectedSFX], waitForCompletion: true), withKey: "action_sound_effect")
+        }
     }
 }
