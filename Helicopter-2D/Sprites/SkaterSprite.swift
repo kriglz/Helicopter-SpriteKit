@@ -39,6 +39,13 @@ public class SkaterSprite: SKSpriteNode {
     }
     
     public func update(deltaTime: TimeInterval, itemLocation: CGPoint){
+        if action(forKey: walkingActionKey) == nil {
+            let walkingAction = SKAction.repeatForever(
+                SKAction.animate(with: walkFrame, timePerFrame: 0.2, resize: false, restore: true)
+            )
+            run(walkingAction, withKey: walkingActionKey)
+        }
+        
         if itemLocation.x < position.x {
             //Item is in the left
             position.x -= movementSpeed * CGFloat(deltaTime)
