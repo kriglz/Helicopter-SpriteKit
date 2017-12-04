@@ -10,7 +10,7 @@ import SpriteKit
 
 public class SkaterSprite: SKSpriteNode {
     
-    ///Stromg which defines walking action.
+    ///String which defines walking action.
     private let walkingActionKey = "action_walking"
     private let walkFrame = [
         SKTexture(imageNamed: "skater1"),
@@ -29,7 +29,7 @@ public class SkaterSprite: SKSpriteNode {
         
 
         skater.zPosition = 5
-        skater.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: skater.size.width - 20, height: skater.size.height)) //(circleOfRadius: skaterSprite.size.width / 2)
+        skater.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: skater.size.width - 70, height: skater.size.height - 20)) //(circleOfRadius: skaterSprite.size.width / 2)
         
         //Adding contactTestBitMask for skater
         skater.physicsBody?.categoryBitMask = SkaterCategory

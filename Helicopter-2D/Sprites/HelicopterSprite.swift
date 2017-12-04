@@ -10,6 +10,16 @@ import SpriteKit
 
 public class HelicopterSprite: SKSpriteNode {
     
+    ///String which defines flying action.
+    private let flyingActionKey = "action_flying"
+    private let flyFrame = [
+        SKTexture(imageNamed: "helicopter1"),
+        SKTexture(imageNamed: "helicopter2"),
+        SKTexture(imageNamed: "helicopter3"),
+        SKTexture(imageNamed: "helicopter4")
+
+    ]
+    
     private var destination: CGPoint!
     private let easings: CGFloat = 0.1
     
@@ -43,6 +53,13 @@ public class HelicopterSprite: SKSpriteNode {
     }
     
     public func update(deltaTime: TimeInterval){
+        if action(forKey: flyingActionKey) == nil {
+            let flyingAction = SKAction.repeatForever(
+                SKAction.animate(with: flyFrame, timePerFrame: 0.1, resize: false, restore: true)
+            )
+            run(flyingAction, withKey: flyingActionKey)
+        }
+        
         let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2))
         
         if distance > 1 {
