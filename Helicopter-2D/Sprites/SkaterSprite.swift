@@ -11,21 +11,29 @@ import SpriteKit
 public class SkaterSprite: SKSpriteNode {
     
     ///String which defines walking action.
-    private let walkingActionKey = "action_walking"
-    private let walkFrame = [
+    private let skatingActionKey = "action_walking"
+    private let skateFrame = [
         SKTexture(imageNamed: "skater1"),
         SKTexture(imageNamed: "skater2"),
         SKTexture(imageNamed: "skater3")
+    ]
+    //Sound effects for hit action.
+    private let skaterSFX = [
+        "blast.mp3",
+        "moan.mp3"
     ]
     
     //Speed of the skater.
     private let movementSpeed: CGFloat = 50
     
+    //Constants for hit action.
+    private var timeSinceLastHit: TimeInterval = 2.0
+    private let maxFlailTime = 2.0
     
     public static func newInstance() -> SkaterSprite {
         
         //Initializing skater sprite form the image
-        let skater = SkaterSprite(imageNamed: "skater")
+        let skater = SkaterSprite(imageNamed: "skater2")
         
 
         skater.zPosition = 5
@@ -39,21 +47,54 @@ public class SkaterSprite: SKSpriteNode {
     }
     
     public func update(deltaTime: TimeInterval, itemLocation: CGPoint){
-        if action(forKey: walkingActionKey) == nil {
-            let walkingAction = SKAction.repeatForever(
-                SKAction.animate(with: walkFrame, timePerFrame: 0.2, resize: false, restore: true)
-            )
-            run(walkingAction, withKey: walkingActionKey)
-        }
         
-        if itemLocation.x < position.x {
-            //Item is in the left
-            position.x -= movementSpeed * CGFloat(deltaTime)
-            xScale = 1
-        } else {
-            //Item is in the right
-            position.x += movementSpeed * CGFloat(deltaTime)
-            xScale = -1
+        timeSinceLastHit += deltaTime
+        
+        //Checks if skater was hit.
+        if timeSinceLastHit >= maxFlailTime {
+            
+            //Adds skating action.
+            if action(forKey: skatingActionKey) == nil {
+                let skatingAction = SKAction.repeatForever(
+                    SKAction.animate(with: skateFrame,
+                                     timePerFrame: 0.2,
+                                     resize: false,
+                                     restore: true)
+                )
+                run(skatingAction, withKey: skatingActionKey)
+            }
+
+            
+            //Corrects the angular rotation.
+            if zRotation != 0 && action(forKey: "action_rotate") == nil {
+                run(SKAction.rotate(toAngle: 0, duration: 0.25), withKey: "action_rotate")
+            }
+            
+            
+            //Stand still if the item is above the skater.
+            if itemLocation.y > position.y && abs(itemLocation.x - position.x) < 2 {
+                physicsBody?.velocity.dx = 0
+                removeAction(forKey: skatingActionKey)
+                texture = skateFrame[1]
+            } else if itemLocation.x < position.x {
+                //Item is in the left
+                position.x -= movementSpeed * CGFloat(deltaTime)
+                xScale = 1
+            } else {
+                //Item is in the right
+                position.x += movementSpeed * CGFloat(deltaTime)
+                xScale = -1
+            }
+            
+            physicsBody?.angularVelocity = 0
         }
+    }
+    
+    public func hitByThunder(){
+        timeSinceLastHit = 0
+        removeAction(forKey: skatingActionKey)
+        
+        let selectedSFX = Int( arc4random_uniform( UInt32( skaterSFX.count)))
+        run( SKAction.playSoundFileNamed( skaterSFX[selectedSFX], waitForCompletion: true))
     }
 }

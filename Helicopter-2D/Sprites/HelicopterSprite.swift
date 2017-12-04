@@ -24,7 +24,8 @@ public class HelicopterSprite: SKSpriteNode {
     private let easings: CGFloat = 0.1
     
     public static func newInstance() -> HelicopterSprite {
-        let helicopter = HelicopterSprite(imageNamed: "helicopter")
+        let helicopter = HelicopterSprite(imageNamed: "helicopter1")
+        helicopter.size = CGSize(width: helicopter.size.width / 2, height: helicopter.size.height / 2)
         
         
         let path = UIBezierPath()

@@ -13,7 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentThunderDropSpawnTime : TimeInterval = 0
-    private var thunderDropSpawnRate : TimeInterval = 5
+    private var thunderDropSpawnRate : TimeInterval = 1
     private let itemEdgeMargin: CGFloat = 25.0
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
@@ -115,6 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func spawnThunders(){
         let thunder = SKSpriteNode(texture: thunderTexture)
         thunder.physicsBody = SKPhysicsBody(texture: thunderTexture, size: thunder.size)
+        thunder.physicsBody?.density = 0.5
         thunder.physicsBody?.categoryBitMask = ThunderDropCategory
         thunder.physicsBody?.contactTestBitMask = FloorCategory | WorldCategory
         
@@ -137,7 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         skaterNode = SkaterSprite.newInstance()
-        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.1 + 1)
+        skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.15)
 
         addChild(skaterNode)
     }
@@ -210,7 +211,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch otherBody.categoryBitMask {
         case ThunderDropCategory:
-            print("Thunder hit the skater")
+            //Thunder hits the skater.
+            skaterNode.hitByThunder()
         case WorldCategory:
             spawnSkater()
         default:
