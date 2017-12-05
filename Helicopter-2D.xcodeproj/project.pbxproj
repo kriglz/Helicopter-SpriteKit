@@ -22,6 +22,8 @@
 		895C9C301FD5EBB200721F09 /* helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C2F1FD5EBB200721F09 /* helicopter.mp3 */; };
 		895C9C321FD5ECF300721F09 /* moan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C311FD5ECF300721F09 /* moan.mp3 */; };
 		895C9C341FD6597200721F09 /* scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C331FD6597200721F09 /* scream.mp3 */; };
+		895C9C371FD729D000721F09 /* scifi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C361FD729D000721F09 /* scifi.mp3 */; };
+		895C9C391FD729D700721F09 /* slowmotion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C381FD729D700721F09 /* slowmotion.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		895C9C2F1FD5EBB200721F09 /* helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = helicopter.mp3; sourceTree = "<group>"; };
 		895C9C311FD5ECF300721F09 /* moan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = moan.mp3; sourceTree = "<group>"; };
 		895C9C331FD6597200721F09 /* scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream.mp3; sourceTree = "<group>"; };
+		895C9C361FD729D000721F09 /* scifi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scifi.mp3; sourceTree = "<group>"; };
+		895C9C381FD729D700721F09 /* slowmotion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slowmotion.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 			children = (
 				890DF3DA1FD0CFCF003BAA7B /* Info.plist */,
 				890DF3C81FD0CFCF003BAA7B /* AppDelegate.swift */,
+				895C9C351FD7299A00721F09 /* Music */,
 				8951CB7D1FD222520046C45C /* Sprites */,
 				8951CB7C1FD222490046C45C /* Scenes */,
 				8951CB7E1FD222710046C45C /* ViewControllers */,
@@ -132,6 +137,15 @@
 				895C9C2D1FD5EBAC00721F09 /* blast.mp3 */,
 			);
 			path = SFX;
+			sourceTree = "<group>";
+		};
+		895C9C351FD7299A00721F09 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				895C9C381FD729D700721F09 /* slowmotion.mp3 */,
+				895C9C361FD729D000721F09 /* scifi.mp3 */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,10 +208,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				895C9C301FD5EBB200721F09 /* helicopter.mp3 in Resources */,
+				895C9C391FD729D700721F09 /* slowmotion.mp3 in Resources */,
 				890DF3D41FD0CFCF003BAA7B /* Main.storyboard in Resources */,
 				895C9C2E1FD5EBAC00721F09 /* blast.mp3 in Resources */,
 				895C9C341FD6597200721F09 /* scream.mp3 in Resources */,
 				890DF3D61FD0CFCF003BAA7B /* Assets.xcassets in Resources */,
+				895C9C371FD729D000721F09 /* scifi.mp3 in Resources */,
 				890DF3D91FD0CFCF003BAA7B /* LaunchScreen.storyboard in Resources */,
 				895C9C321FD5ECF300721F09 /* moan.mp3 in Resources */,
 			);
