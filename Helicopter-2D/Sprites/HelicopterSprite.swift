@@ -115,17 +115,17 @@ public class HelicopterSprite: SKSpriteNode {
         }
         
         
-//        var explosionNode = SKSpriteNode.init(imageNamed: "Boom")
-//        explosionNode.position = position
-//        explosionNode.zPosition = zPosition + 1.0
-//        addChild(explosionNode)
-//        
-//        if action(forKey: "explosionKey") == nil {
-//            let explosionAction = SKAction.repeat(SKAction.animate(with: explosionFrame, timePerFrame: 2, resize: false, restore: true), count: 3)
-//            run(explosionAction, withKey: "explosionKey")
-//        }
-//        explosionNode.removeAllActions()
-//        explosionNode.removeFromParent()
-//        explosionNode.physicsBody = nil
+        var explosionNode = SKSpriteNode.init(imageNamed: "Boom")
+        explosionNode.position = position
+        explosionNode.zPosition = zPosition + 1.0
+        addChild(explosionNode)
+        
+        if action(forKey: "explosionKey") == nil {
+            let explosionAction = SKAction.repeat(SKAction.animate(with: explosionFrame, timePerFrame: 2, resize: false, restore: true), count: 3)
+            run(explosionAction, withKey: "explosionKey")
+        }
+        explosionNode.removeAllActions()
+        explosionNode.removeFromParent()
+        explosionNode.physicsBody = nil
     }
 }
