@@ -101,10 +101,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Updates skater movement
         skaterNode.update(deltaTime: dt, itemLocation: itemNode.position)
         
-    
-        
         self.lastUpdateTime = currentTime
     }
+    
+    
+    
+    
     
     
     
@@ -141,7 +143,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(helicopterNode)
     }
 
-    
     //Creates skater.
     func spawnSkater(){
         //Checks if the skater already exists.
@@ -178,6 +179,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
    
+    
+    
+    
+    
     //Contact delegate
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -227,46 +232,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Finds out if thunder hit helicopter
     private func handleHelicopterCollision(contact: SKPhysicsContact) {
         var otherBody: SKPhysicsBody
-//        var helicopterBody: SKPhysicsBody
-
         
         if contact.bodyA.categoryBitMask == HelicopterCategory {
-//            helicopterBody = contact.bodyA
             otherBody = contact.bodyB
         } else {
             otherBody = contact.bodyA
-//            helicopterBody = contact.bodyB
         }
         
         switch otherBody.categoryBitMask {
         case ThunderDropCategory:
-            
-            //Thunder hits the helicopter.
             thunderStrike(to: otherBody.node)
-
             helicopterNode.hitByThunder()
-            
-//            helicopterBody.node?.removeFromParent()
-//            helicopterBody.node?.physicsBody = nil
-            
-            
 
         default:
             print("Something hit helicopter")
         }
     }
-    
-    //Removes thunder after hit
-    private func thunderStrike(to thunder: SKNode?){
-        thunder?.physicsBody?.velocity = CGVector.zero
-
-        thunder?.removeFromParent()
-        thunder?.physicsBody = nil
-        
-//        run( SKAction.playSoundFileNamed("blast.mp3", waitForCompletion: true))
-    }
-    
-    
     
     //Finds out with which body skater collided.
     private func handleSkaterCollision(contact: SKPhysicsContact){
@@ -320,5 +301,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             print("something else touched item")
         }
+    }
+    
+    //Removes thunder after hit.
+    private func thunderStrike(to thunder: SKNode?){
+        thunder?.physicsBody?.velocity = CGVector.zero
+        
+        thunder?.removeFromParent()
+        thunder?.physicsBody = nil
     }
 }

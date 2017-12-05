@@ -34,20 +34,21 @@ public class HelicopterSprite: SKSpriteNode {
         SKTexture(imageNamed: "boom3")
     ]
     
-    
     private var destination: CGPoint!
     private let easings: CGFloat = 0.1
+
     
     
     
     
     
-    public static func newInstance() -> HelicopterSprite {        
+    ///Creates a new helicopter node.
+    public static func newInstance() -> HelicopterSprite {
+        
         let helicopter = HelicopterSprite(imageNamed: "helicopter1")
         helicopter.zPosition = 4
 
         helicopter.size = CGSize(width: helicopter.size.width / 2, height: helicopter.size.height / 2)
-        
         
         let path = UIBezierPath()
         path.move(to: CGPoint())
@@ -68,22 +69,28 @@ public class HelicopterSprite: SKSpriteNode {
         return helicopter
     }
     
+    
     public func updatePosition(point: CGPoint){
         position = point
         destination = point
     }
     
+    
     public func setDestination(destination: CGPoint){
         self.destination = destination
     }
     
+    
+    ///Updates helicopter on the screen.
     public func update(deltaTime: TimeInterval){
         
+        //Calculated the time since last helicopter hit by thunder.
         timeSinceLastHit += deltaTime
         
         //Checks if skater was hit.
         if timeSinceLastHit >= maxFlailTime {
             
+            //Adds movement animation to helicopter.
             if action(forKey: flyingActionKey) == nil {
                 let flyingAction = SKAction.repeatForever(
                     SKAction.animate(with: flyFrame, timePerFrame: 0.1, resize: false, restore: true)
@@ -91,8 +98,10 @@ public class HelicopterSprite: SKSpriteNode {
                 run(flyingAction, withKey: flyingActionKey)
             }
             
+            ///The distance from helicopter to the dragging finger.
             let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2))
             
+            //Sets the helicopter speed.
             if distance > 1 {
                 let directionX = destination.x - position.x
                 let directionY = destination.y - position.y
@@ -105,17 +114,19 @@ public class HelicopterSprite: SKSpriteNode {
         }
     }
     
+    
+    ///Updates helicopter on the screen after thunder hit action.
     public func hitByThunder(){
-
+        //Sets hit time constant to 0.
         timeSinceLastHit = 0
+        
+        //Stops helicopter from moving.
         removeAction(forKey: flyingActionKey)
-//        setDestination(destination: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2))
-
-        if action(forKey: "action_sound_effect") == nil {
-            run( SKAction.playSoundFileNamed( "blast.mp3", waitForCompletion: true), withKey: "action_sound_effect")
-        }
         
+        //Plays helicopter hit by thunder music.
+        run( SKAction.playSoundFileNamed( "blast.mp3", waitForCompletion: true))//, withKey:
         
+        //Helicopter explosion action.
         let explosionNode = SKSpriteNode.init(imageNamed: "Boom1")
         explosionNode.position = position
         explosionNode.zPosition = zPosition + 1.0

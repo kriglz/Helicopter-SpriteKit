@@ -8,7 +8,9 @@
 
 import SpriteKit
 
-public class ItemSprite: SKSpriteNode{
+public class ItemSprite: SKSpriteNode {
+    
+    ///Creates a new item node.
     public static func newInstance() -> ItemSprite {
         let item = ItemSprite(imageNamed: "item\((arc4random()%3)+1)")
         

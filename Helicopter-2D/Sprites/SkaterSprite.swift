@@ -37,8 +37,10 @@ public class SkaterSprite: SKSpriteNode {
     
     
     
+    
+    
+    ///Creates new skater node.
     public static func newInstance() -> SkaterSprite {
-        //Initializing skater sprite form the image
         let skater = SkaterSprite(imageNamed: "skater2")
 
         skater.zPosition = 5
@@ -52,10 +54,8 @@ public class SkaterSprite: SKSpriteNode {
     }
     
     
-    
-    
+    ///Updates skater on the screen.
     public func update(deltaTime: TimeInterval, itemLocation: CGPoint){
-        
         timeSinceLastHit += deltaTime
         
         //Checks if skater was hit.
@@ -98,10 +98,11 @@ public class SkaterSprite: SKSpriteNode {
         }
     }
     
+    
+    ///Updates skater on the screen after thunder hit action.
     public func hitByThunder(){
         timeSinceLastHit = 0
         removeAction(forKey: skatingActionKey)
-        
         
         //Determines if skater needs to moan.
         if currentThunderHits < maxThunderHits {
