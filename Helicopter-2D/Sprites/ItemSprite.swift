@@ -15,7 +15,7 @@ public class ItemSprite: SKSpriteNode{
         item.physicsBody = SKPhysicsBody(rectangleOf: CGSize.init(width: item.size.width * 0.8, height: item.size.height * 0.8))
         item.physicsBody?.categoryBitMask = ItemCategory
         item.physicsBody?.contactTestBitMask = WorldCategory | ThunderDropCategory | SkaterCategory
-//        item.physicsBody?.isDynamic = false
+        item.physicsBody?.isDynamic = false
 
         
         item.zPosition = 5

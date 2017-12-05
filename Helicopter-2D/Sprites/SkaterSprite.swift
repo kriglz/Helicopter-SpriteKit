@@ -19,8 +19,7 @@ public class SkaterSprite: SKSpriteNode {
     ]
     //Sound effects for hit action.
     private let skaterSFX = [
-        "blast.mp3",
-        "moan.mp3"
+        "scream.mp3"
     ]
     
     //Speed of the skater.
@@ -31,15 +30,16 @@ public class SkaterSprite: SKSpriteNode {
     private let maxFlailTime = 2.0
     
     ///Int which counts how many times skater was hit by thunder.
-    private var currentThunderHits = 4
+    private var currentThunderHits = 1
     ///Int which defines how many times skater needs to be hit before moaning.
-    private let maxThunderHits = 4
+    private let maxThunderHits = 1
+    
+    
+    
     
     public static func newInstance() -> SkaterSprite {
-        
         //Initializing skater sprite form the image
         let skater = SkaterSprite(imageNamed: "skater2")
-        
 
         skater.zPosition = 5
         skater.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: skater.size.width - 70, height: skater.size.height - 20)) //(circleOfRadius: skaterSprite.size.width / 2)
@@ -50,6 +50,9 @@ public class SkaterSprite: SKSpriteNode {
         
         return skater
     }
+    
+    
+    
     
     public func update(deltaTime: TimeInterval, itemLocation: CGPoint){
         
@@ -98,6 +101,7 @@ public class SkaterSprite: SKSpriteNode {
     public func hitByThunder(){
         timeSinceLastHit = 0
         removeAction(forKey: skatingActionKey)
+        
         
         //Determines if skater needs to moan.
         if currentThunderHits < maxThunderHits {

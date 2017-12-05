@@ -21,6 +21,7 @@
 		895C9C2E1FD5EBAC00721F09 /* blast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C2D1FD5EBAC00721F09 /* blast.mp3 */; };
 		895C9C301FD5EBB200721F09 /* helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C2F1FD5EBB200721F09 /* helicopter.mp3 */; };
 		895C9C321FD5ECF300721F09 /* moan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C311FD5ECF300721F09 /* moan.mp3 */; };
+		895C9C341FD6597200721F09 /* scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C331FD6597200721F09 /* scream.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		895C9C2D1FD5EBAC00721F09 /* blast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blast.mp3; sourceTree = "<group>"; };
 		895C9C2F1FD5EBB200721F09 /* helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = helicopter.mp3; sourceTree = "<group>"; };
 		895C9C311FD5ECF300721F09 /* moan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = moan.mp3; sourceTree = "<group>"; };
+		895C9C331FD6597200721F09 /* scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		895C9C2C1FD5EB5800721F09 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
+				895C9C331FD6597200721F09 /* scream.mp3 */,
 				895C9C311FD5ECF300721F09 /* moan.mp3 */,
 				895C9C2F1FD5EBB200721F09 /* helicopter.mp3 */,
 				895C9C2D1FD5EBAC00721F09 /* blast.mp3 */,
@@ -193,6 +196,7 @@
 				895C9C301FD5EBB200721F09 /* helicopter.mp3 in Resources */,
 				890DF3D41FD0CFCF003BAA7B /* Main.storyboard in Resources */,
 				895C9C2E1FD5EBAC00721F09 /* blast.mp3 in Resources */,
+				895C9C341FD6597200721F09 /* scream.mp3 in Resources */,
 				890DF3D61FD0CFCF003BAA7B /* Assets.xcassets in Resources */,
 				890DF3D91FD0CFCF003BAA7B /* LaunchScreen.storyboard in Resources */,
 				895C9C321FD5ECF300721F09 /* moan.mp3 in Resources */,

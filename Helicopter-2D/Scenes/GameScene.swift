@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     ///The SKTexture of the thunder.
     let thunderTexture = SKTexture.init(imageNamed: "thunder")
     private let backgroundNode = BackgroundNode()
-    private let helicopterNode = HelicopterSprite.newInstance()
+    private var helicopterNode: HelicopterSprite!
     private var itemNode: ItemSprite!
     private var skaterNode: SkaterSprite!
     
@@ -32,16 +32,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(backgroundNode)
         
         //Adding helicopter to the scene.
-        helicopterNode.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
-        helicopterNode.zPosition = 4
-        addChild(helicopterNode)
-        
+        spawnHelicopter()
+
         //Adding skater to the scene.
         spawnSkater()
         
         //Adding port to the scene.
         spawnItem()
-        print(itemNode.position)
         
         //Adding WorldFrame
         var worldFrame = frame
@@ -116,8 +113,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let thunder = SKSpriteNode(texture: thunderTexture)
         thunder.physicsBody = SKPhysicsBody(texture: thunderTexture, size: thunder.size)
         thunder.physicsBody?.density = 0.5
+        thunder.physicsBody?.allowsRotation = false
         thunder.physicsBody?.categoryBitMask = ThunderDropCategory
-        thunder.physicsBody?.contactTestBitMask = FloorCategory | WorldCategory
+        thunder.physicsBody?.contactTestBitMask = WorldCategory //FloorCategory | WorldCategory
         
         let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
         let yPosition = size.height
@@ -127,6 +125,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(thunder)
     }
+    
+    //Creates helicopter
+    func spawnHelicopter(){
+        //Checks if the helicopter already exists.
+        if let currentHelicopter = helicopterNode, children.contains(currentHelicopter){
+            helicopterNode.removeFromParent()
+            helicopterNode.removeAllActions()
+            helicopterNode.physicsBody = nil
+        }
+        
+        helicopterNode = HelicopterSprite.newInstance()
+        helicopterNode.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
+        
+        addChild(helicopterNode)
+    }
+
     
     //Creates skater.
     func spawnSkater(){
@@ -166,15 +180,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     //Contact delegate
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == ThunderDropCategory {
-            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
         
-        } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
-            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-        }
-        
-        
-        //Checks if item was hit
+        //Checks if item was hit.
         if contact.bodyA.categoryBitMask == ItemCategory || contact.bodyB.categoryBitMask == ItemCategory {
             handleItemCollision(contact: contact)
             return
@@ -186,6 +193,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        //Checks if helicopter was hit.
+        if contact.bodyA.categoryBitMask == HelicopterCategory || contact.bodyB.categoryBitMask == HelicopterCategory {
+            handleHelicopterCollision(contact: contact)
+            return
+        }
+        
+        //After first hit thunder does not bounce anymore
+        if contact.bodyA.categoryBitMask == ThunderDropCategory {
+            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+        } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
+            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+        }
+        
+        //Removes node, when it hits worldframe.
         if contact.bodyA.categoryBitMask == WorldCategory {
             contact.bodyB.node?.removeFromParent()
             contact.bodyB.node?.physicsBody = nil
@@ -199,8 +220,56 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
+    
+    
+    
+    //Finds out if thunder hit helicopter
+    private func handleHelicopterCollision(contact: SKPhysicsContact) {
+        var otherBody: SKPhysicsBody
+//        var helicopterBody: SKPhysicsBody
+
+        
+        if contact.bodyA.categoryBitMask == HelicopterCategory {
+//            helicopterBody = contact.bodyA
+            otherBody = contact.bodyB
+        } else {
+            otherBody = contact.bodyA
+//            helicopterBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+        case ThunderDropCategory:
+            
+            //Thunder hits the helicopter.
+            thunderStrike(to: otherBody.node)
+
+            helicopterNode.hitByThunder()
+            
+//            helicopterBody.node?.removeFromParent()
+//            helicopterBody.node?.physicsBody = nil
+            
+            
+
+        default:
+            print("Something hit helicopter")
+        }
+    }
+    
+    //Removes thunder after hit
+    private func thunderStrike(to thunder: SKNode?){
+        thunder?.physicsBody?.velocity = CGVector.zero
+
+        thunder?.removeFromParent()
+        thunder?.physicsBody = nil
+        
+//        run( SKAction.playSoundFileNamed("blast.mp3", waitForCompletion: true))
+    }
+    
+    
+    
     //Finds out with which body skater collided.
-    func handleSkaterCollision(contact: SKPhysicsContact){
+    private func handleSkaterCollision(contact: SKPhysicsContact){
         var otherBody: SKPhysicsBody
         
         if contact.bodyA.categoryBitMask == SkaterCategory {
@@ -213,41 +282,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case ThunderDropCategory:
             //Thunder hits the skater.
             skaterNode.hitByThunder()
+            
+            thunderStrike(to: otherBody.node)
+            
         case WorldCategory:
             spawnSkater()
+            
         default:
             print("Something hit skater")
         }
     }
     
-    //Finds put with which body ports collided.
-    func handleItemCollision(contact: SKPhysicsContact){
+    //Finds put with which body item collided.
+    private func handleItemCollision(contact: SKPhysicsContact){
         var otherBody: SKPhysicsBody
-        var portBody: SKPhysicsBody
+        var itemBody: SKPhysicsBody
         
         if contact.bodyA.categoryBitMask == ItemCategory {
             otherBody = contact.bodyB
-            portBody = contact.bodyA
+            itemBody = contact.bodyA
         } else {
             otherBody = contact.bodyA
-            portBody = contact.bodyB
+            itemBody = contact.bodyB
         }
         
         switch otherBody.categoryBitMask {
             
         case SkaterCategory:
             //TODO increment points
-            print("Disappear skater")
-            
             fallthrough //picks the following case (doesn't matter if that matches or not)
             
         case WorldCategory:
-            portBody.node?.removeFromParent()
-            portBody.node?.physicsBody = nil
+            itemBody.node?.removeFromParent()
+            itemBody.node?.physicsBody = nil
             spawnItem()
             
         default:
-            print("something else touched port")
+            print("something else touched item")
         }
     }
 }
