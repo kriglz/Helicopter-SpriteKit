@@ -118,6 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         thunder.physicsBody?.allowsRotation = false
         thunder.physicsBody?.categoryBitMask = ThunderDropCategory
         thunder.physicsBody?.contactTestBitMask = WorldCategory //FloorCategory | WorldCategory
+        thunder.physicsBody?.collisionBitMask = 0
         
         let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
         let yPosition = size.height
@@ -205,11 +206,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //After first hit thunder does not bounce anymore
-        if contact.bodyA.categoryBitMask == ThunderDropCategory {
-            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
-        } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
-            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-        }
+//        if contact.bodyA.categoryBitMask == ThunderDropCategory {
+//            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+//        } else if contact.bodyB.categoryBitMask == ThunderDropCategory {
+//            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+//        }
         
         //Removes node, when it hits worldframe.
         if contact.bodyA.categoryBitMask == WorldCategory {
