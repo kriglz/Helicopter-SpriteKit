@@ -25,6 +25,8 @@
 		895C9C371FD729D000721F09 /* scifi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C361FD729D000721F09 /* scifi.mp3 */; };
 		895C9C391FD729D700721F09 /* slowmotion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C381FD729D700721F09 /* slowmotion.mp3 */; };
 		895C9C3B1FD72A4800721F09 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C9C3A1FD72A4800721F09 /* SoundManager.swift */; };
+		895C9C3E1FD731D500721F09 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C3D1FD731D500721F09 /* Pixel Digivolve.otf */; };
+		895C9C401FD733AE00721F09 /* Comic-ink.otf in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C3F1FD733AE00721F09 /* Comic-ink.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		895C9C361FD729D000721F09 /* scifi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scifi.mp3; sourceTree = "<group>"; };
 		895C9C381FD729D700721F09 /* slowmotion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slowmotion.mp3; sourceTree = "<group>"; };
 		895C9C3A1FD72A4800721F09 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		895C9C3D1FD731D500721F09 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "pixel_digivolve/Pixel Digivolve.otf"; sourceTree = "<group>"; };
+		895C9C3F1FD733AE00721F09 /* Comic-ink.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comic-ink.otf"; path = "comic_ink/Comic-ink.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 		8951CB7B1FD2201D0046C45C /* Supporting fails */ = {
 			isa = PBXGroup;
 			children = (
+				895C9C3C1FD7319F00721F09 /* Fonts */,
 				895C9C351FD7299A00721F09 /* Music */,
 				895C9C2C1FD5EB5800721F09 /* SFX */,
 				895101ED1FD2449A006C9C24 /* Constants.swift */,
@@ -149,6 +154,15 @@
 				895C9C361FD729D000721F09 /* scifi.mp3 */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		895C9C3C1FD7319F00721F09 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				895C9C3F1FD733AE00721F09 /* Comic-ink.otf */,
+				895C9C3D1FD731D500721F09 /* Pixel Digivolve.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,10 +225,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				895C9C301FD5EBB200721F09 /* helicopter.mp3 in Resources */,
+				895C9C401FD733AE00721F09 /* Comic-ink.otf in Resources */,
 				895C9C391FD729D700721F09 /* slowmotion.mp3 in Resources */,
 				890DF3D41FD0CFCF003BAA7B /* Main.storyboard in Resources */,
 				895C9C2E1FD5EBAC00721F09 /* blast.mp3 in Resources */,
 				895C9C341FD6597200721F09 /* scream.mp3 in Resources */,
+				895C9C3E1FD731D500721F09 /* Pixel Digivolve.otf in Resources */,
 				890DF3D61FD0CFCF003BAA7B /* Assets.xcassets in Resources */,
 				895C9C371FD729D000721F09 /* scifi.mp3 in Resources */,
 				890DF3D91FD0CFCF003BAA7B /* LaunchScreen.storyboard in Resources */,

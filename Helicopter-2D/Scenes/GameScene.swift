@@ -52,6 +52,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector.init(dx: 0.1, dy: -1.0)
 
+        
+        let label = SKLabelNode(fontNamed: "Comic-ink")
+        label.text = "Hello Kristina"
+        label.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        label.zPosition = 100
+        addChild(label)
+        
     }
     
     

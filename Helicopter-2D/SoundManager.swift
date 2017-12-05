@@ -16,7 +16,7 @@ class SoundManager: NSObject, AVAudioPlayerDelegate {
     
     //Music: http://www.bensound.com/royalty-free-music
     static private let tracks = [
-        "slowmotion",
+//        "slowmotion",
         "scifi"
     ]
     
