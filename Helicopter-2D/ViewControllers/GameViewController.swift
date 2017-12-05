@@ -29,7 +29,9 @@ class GameViewController: UIViewController {
             view.showsPhysics = true
             view.showsFPS = true
             view.showsNodeCount = true
-        }  
+        }
+        
+        SoundManager.sharedInstance.startPlaying()
     }
     
     

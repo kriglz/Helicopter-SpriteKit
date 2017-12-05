@@ -24,6 +24,7 @@
 		895C9C341FD6597200721F09 /* scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C331FD6597200721F09 /* scream.mp3 */; };
 		895C9C371FD729D000721F09 /* scifi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C361FD729D000721F09 /* scifi.mp3 */; };
 		895C9C391FD729D700721F09 /* slowmotion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C381FD729D700721F09 /* slowmotion.mp3 */; };
+		895C9C3B1FD72A4800721F09 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C9C3A1FD72A4800721F09 /* SoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		895C9C331FD6597200721F09 /* scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream.mp3; sourceTree = "<group>"; };
 		895C9C361FD729D000721F09 /* scifi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scifi.mp3; sourceTree = "<group>"; };
 		895C9C381FD729D700721F09 /* slowmotion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slowmotion.mp3; sourceTree = "<group>"; };
+		895C9C3A1FD72A4800721F09 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +80,9 @@
 		890DF3C71FD0CFCF003BAA7B /* Helicopter-2D */ = {
 			isa = PBXGroup;
 			children = (
+				895C9C3A1FD72A4800721F09 /* SoundManager.swift */,
 				890DF3DA1FD0CFCF003BAA7B /* Info.plist */,
 				890DF3C81FD0CFCF003BAA7B /* AppDelegate.swift */,
-				895C9C351FD7299A00721F09 /* Music */,
 				8951CB7D1FD222520046C45C /* Sprites */,
 				8951CB7C1FD222490046C45C /* Scenes */,
 				8951CB7E1FD222710046C45C /* ViewControllers */,
@@ -92,6 +94,7 @@
 		8951CB7B1FD2201D0046C45C /* Supporting fails */ = {
 			isa = PBXGroup;
 			children = (
+				895C9C351FD7299A00721F09 /* Music */,
 				895C9C2C1FD5EB5800721F09 /* SFX */,
 				895101ED1FD2449A006C9C24 /* Constants.swift */,
 				890DF3D21FD0CFCF003BAA7B /* Main.storyboard */,
@@ -229,6 +232,7 @@
 				895101EE1FD2449A006C9C24 /* Constants.swift in Sources */,
 				890DF3CF1FD0CFCF003BAA7B /* GameScene.swift in Sources */,
 				895101F01FD3689D006C9C24 /* HelicopterSprite.swift in Sources */,
+				895C9C3B1FD72A4800721F09 /* SoundManager.swift in Sources */,
 				8951CB801FD230280046C45C /* BackgroundNode.swift in Sources */,
 				890DF3D11FD0CFCF003BAA7B /* GameViewController.swift in Sources */,
 				890DF3C91FD0CFCF003BAA7B /* AppDelegate.swift in Sources */,
