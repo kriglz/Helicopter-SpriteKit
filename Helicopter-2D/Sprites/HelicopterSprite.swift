@@ -24,13 +24,14 @@ public class HelicopterSprite: SKSpriteNode {
     private let explosionSound = "blast.mp3"
     
     //Constants for hit action.
-    private var timeSinceLastHit: TimeInterval = 1.0
+    private var timeSinceLastHit: TimeInterval = 0.5
     private let maxFlailTime = 1.0
     
     //Hit picture.
     private let explosionFrame = [
-        SKTexture(imageNamed: "boom"),
-        SKTexture(imageNamed: "boom")
+        SKTexture(imageNamed: "boom1"),
+        SKTexture(imageNamed: "boom2"),
+        SKTexture(imageNamed: "boom3")
     ]
     
     
@@ -115,13 +116,14 @@ public class HelicopterSprite: SKSpriteNode {
         }
         
         
-        var explosionNode = SKSpriteNode.init(imageNamed: "Boom")
+        let explosionNode = SKSpriteNode.init(imageNamed: "Boom1")
         explosionNode.position = position
         explosionNode.zPosition = zPosition + 1.0
         addChild(explosionNode)
         
         if action(forKey: "explosionKey") == nil {
-            let explosionAction = SKAction.repeat(SKAction.animate(with: explosionFrame, timePerFrame: 2, resize: false, restore: true), count: 3)
+            let explosionAction = SKAction.repeatForever(SKAction.animate(with: explosionFrame, timePerFrame: maxFlailTime/3, resize: false, restore: true))
+            
             run(explosionAction, withKey: "explosionKey")
         }
         explosionNode.removeAllActions()
