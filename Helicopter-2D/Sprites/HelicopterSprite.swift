@@ -53,8 +53,8 @@ public class HelicopterSprite: SKSpriteNode {
         let path = UIBezierPath()
         path.move(to: CGPoint())
         
-        let leftCorner = CGPoint(x: -helicopter.size.width / 3 - 5, y: helicopter.size.height / 3)
-        let rightCorner = CGPoint(x: helicopter.size.width / 3 + 5, y: helicopter.size.height / 3)
+        let leftCorner = CGPoint(x: -helicopter.size.width / 3 + 15, y: helicopter.size.height / 3)
+        let rightCorner = CGPoint(x: helicopter.size.width / 3 - 15, y: helicopter.size.height / 3)
         
         path.addLine(to: leftCorner)
         path.addLine(to: rightCorner)

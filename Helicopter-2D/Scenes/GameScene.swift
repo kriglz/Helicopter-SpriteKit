@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let backgroundNode = BackgroundNode()
     private var helicopterNode: HelicopterSprite!
     private var itemNode: ItemSprite!
+    private let hudNode = HudNode()
     private var skaterNode: SkaterSprite!
     
     
@@ -40,6 +41,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Adding port to the scene.
         spawnItem()
         
+        //Addind score label.
+        hudNode.setup(size: size)
+        addChild(hudNode)
+        
         //Adding WorldFrame
         var worldFrame = frame
         worldFrame.origin.x = -100
@@ -51,14 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody?.categoryBitMask = WorldCategory
         self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector.init(dx: 0.1, dy: -1.0)
-
-        
-        let label = SKLabelNode(fontNamed: "Comic-ink")
-        label.text = "Hello Kristina"
-        label.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        label.zPosition = 100
-        addChild(label)
-        
     }
     
     
@@ -164,6 +161,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         skaterNode.position = CGPoint(x: helicopterNode.position.x, y: size.height * 0.15)
 
         addChild(skaterNode)
+        
+        //Resets the score label.
+        hudNode.resetPoints()
     }
     
     //Creates item.
@@ -274,6 +274,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             thunderStrike(to: otherBody.node)
             
+            //Resets score because skater was hit by thunder.
+            hudNode.resetPoints()
+            
         case WorldCategory:
             spawnSkater()
             
@@ -298,7 +301,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch otherBody.categoryBitMask {
             
         case SkaterCategory:
-            //TODO increment points
+
+            //Increasing the score points.
+            hudNode.addPoint()
+            
             fallthrough //picks the following case (doesn't matter if that matches or not)
             
         case WorldCategory:
