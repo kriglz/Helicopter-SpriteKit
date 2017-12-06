@@ -20,7 +20,7 @@ class HudNode: SKNode {
     public func setup(size: CGSize){
         let defaults = UserDefaults.standard
         
-        highScore = defaults.integer(forKey: scoreKey)
+        highScore = defaults.integer(forKey: ScoreKey)
         
         scoreNode.text = "\(score)"
         scoreNode.fontSize = 50
@@ -42,7 +42,7 @@ class HudNode: SKNode {
         
         if score > highScore {
             let defaults = UserDefaults.standard
-            defaults.set(score, forKey: scoreKey)
+            defaults.set(score, forKey: ScoreKey)
             
             if !showsHighScore {
                 showsHighScore = true

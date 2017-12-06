@@ -28,6 +28,7 @@
 		895C9C3E1FD731D500721F09 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C3D1FD731D500721F09 /* Pixel Digivolve.otf */; };
 		895C9C401FD733AE00721F09 /* Comic-ink.otf in Resources */ = {isa = PBXBuildFile; fileRef = 895C9C3F1FD733AE00721F09 /* Comic-ink.otf */; };
 		895C9C421FD7359300721F09 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C9C411FD7359300721F09 /* HudNode.swift */; };
+		895C9C441FD76A5D00721F09 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C9C431FD76A5D00721F09 /* MenuScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		895C9C3D1FD731D500721F09 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "pixel_digivolve/Pixel Digivolve.otf"; sourceTree = "<group>"; };
 		895C9C3F1FD733AE00721F09 /* Comic-ink.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Comic-ink.otf"; path = "comic_ink/Comic-ink.otf"; sourceTree = "<group>"; };
 		895C9C411FD7359300721F09 /* HudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudNode.swift; sourceTree = "<group>"; };
+		895C9C431FD76A5D00721F09 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		8951CB7C1FD222490046C45C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				895C9C431FD76A5D00721F09 /* MenuScene.swift */,
 				890DF3CE1FD0CFCF003BAA7B /* GameScene.swift */,
 			);
 			path = Scenes;
@@ -250,6 +253,7 @@
 			files = (
 				895101EE1FD2449A006C9C24 /* Constants.swift in Sources */,
 				890DF3CF1FD0CFCF003BAA7B /* GameScene.swift in Sources */,
+				895C9C441FD76A5D00721F09 /* MenuScene.swift in Sources */,
 				895101F01FD3689D006C9C24 /* HelicopterSprite.swift in Sources */,
 				895C9C421FD7359300721F09 /* HudNode.swift in Sources */,
 				895C9C3B1FD72A4800721F09 /* SoundManager.swift in Sources */,

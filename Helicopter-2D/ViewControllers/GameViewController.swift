@@ -18,7 +18,8 @@ class GameViewController: UIViewController {
         //Loading scene directly.
         
         /// Main game scene.
-        let sceneNode = GameScene(size: view.frame.size)
+        let sceneNode = MenuScene(size: view.frame.size)
+//        let sceneNode = GameScene(size: view.frame.size)
         
         // Present the scene
         if let view = self.view as! SKView? {

@@ -12,5 +12,5 @@ let FloorCategory: UInt32 = 0x1 << 3
 let SkaterCategory: UInt32 = 0x1 << 4
 let ItemCategory: UInt32 = 0x1 << 5
 let HelicopterCategory: UInt32 = 0x1 << 6
-let scoreKey = "skater_highscore"
+let ScoreKey = "skater_highscore"
 
