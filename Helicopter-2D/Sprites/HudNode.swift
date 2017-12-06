@@ -90,4 +90,36 @@ class HudNode: SKNode {
             scoreNode.fontColor = SKColor.white
         }
     }
+    
+    
+    //Mimicing the touch behaviour.
+    func touchBeganAtPoint(point: CGPoint){
+        let containsPoint = quitButton.contains(point)
+        
+        if quitButtonPressed && !containsPoint {
+            //Cancek the last click
+            quitButtonPressed = false
+            quitButton.texture = quitButtonTexture
+        } else if containsPoint {
+            quitButton.texture = quitButtonPressedTexture
+            quitButtonPressed = true
+        }
+    }
+    
+    func touchMovedToPoint(point: CGPoint){
+        if quitButtonPressed {
+            if quitButton.contains(point) {
+                quitButton.texture = quitButtonPressedTexture
+            } else {
+                quitButton.texture = quitButtonTexture
+            }
+        }
+    }
+    
+    func touchEndedAtPoint(point: CGPoint){
+        if quitButton.contains(point){
+            //TODO tell the game to quit the game
+        }
+        quitButton.texture = quitButtonTexture
+    }
 }

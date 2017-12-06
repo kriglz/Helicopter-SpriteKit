@@ -65,7 +65,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touchPoint = touches.first?.location(in: self)
         
         if let touchPoint = touchPoint {
-            helicopterNode.setDestination(destination: touchPoint)
+            hudNode.touchBeganAtPoint(point: touchPoint)
+            
+            if !hudNode.quitButtonPressed {
+                helicopterNode.setDestination(destination: touchPoint)
+            }
         }
     }
     
@@ -73,9 +77,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touchPoint = touches.first?.location(in: self)
         
         if let touchPoint = touchPoint{
-            helicopterNode.setDestination(destination: touchPoint)
+            hudNode.touchMovedToPoint(point: touchPoint)
+            
+            if !hudNode.quitButtonPressed {
+                helicopterNode.setDestination(destination: touchPoint)
+            }
         }
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
+        
+        if let touchPoint = touchPoint {
+            hudNode.touchEndedAtPoint(point: touchPoint)
+        }
+    }
+    
+    
     
     
     
