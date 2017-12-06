@@ -273,6 +273,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             skaterNode.hitByThunder()
             
             thunderStrike(to: otherBody.node)
+            skaterNode.physicsBody?.velocity = CGVector.zero
             
             //Resets score because skater was hit by thunder.
             hudNode.resetPoints()

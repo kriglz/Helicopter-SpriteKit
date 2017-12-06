@@ -45,6 +45,7 @@ public class SkaterSprite: SKSpriteNode {
 
         skater.zPosition = 5
         skater.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: skater.size.width - 70, height: skater.size.height - 20)) //(circleOfRadius: skaterSprite.size.width / 2)
+        skater.physicsBody?.allowsRotation = false
         
         //Adding contactTestBitMask for skater
         skater.physicsBody?.categoryBitMask = SkaterCategory
