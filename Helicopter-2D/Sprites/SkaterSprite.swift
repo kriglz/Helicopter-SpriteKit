@@ -104,6 +104,11 @@ public class SkaterSprite: SKSpriteNode {
         timeSinceLastHit = 0
         removeAction(forKey: skatingActionKey)
         
+        //Mutes if sound is off.
+        guard !SoundManager.sharedInstance.isMuted else {
+            return
+        }
+        
         //Determines if skater needs to moan.
         if currentThunderHits < maxThunderHits {
             currentThunderHits += 1

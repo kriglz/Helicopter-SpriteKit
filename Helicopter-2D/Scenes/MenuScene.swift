@@ -39,7 +39,7 @@ class MenuScene: SKScene {
         let edgeMargin: CGFloat = 25
         
         //Sets up sound button.
-        soundButton = SKSpriteNode(texture: soundButtonTexture)
+        soundButton = SKSpriteNode(texture: SoundManager.sharedInstance.isMuted ? soundButtonOffTexture : soundButtonTexture)
         soundButton.position = CGPoint(x: size.width - soundButton.size.width / 2 - edgeMargin, y: soundButton.size.height / 2 + edgeMargin)
         addChild(soundButton)
         
@@ -68,7 +68,7 @@ class MenuScene: SKScene {
                 handleStartButtonHover(isHovering: true)
             } else if soundButton.contains( touch.location(in: self)){
                 selectedButton = soundButton
-                handleSoundButtonHover(isHovering: false)
+                handleSoundButtonHover(isHovering: true)
             }
         }
     }
@@ -138,7 +138,13 @@ class MenuScene: SKScene {
     
     ///Handles sound button behaviour.
     private func handleSoundButtonClicked(){
-        print("Sound clicked")
+        if SoundManager.sharedInstance.toggleMute(){
+            //Is muted.
+            soundButton.texture = soundButtonOffTexture
+        } else {
+            //Is not muted.
+            soundButton.texture = soundButtonTexture
+        }
     }
     
 }

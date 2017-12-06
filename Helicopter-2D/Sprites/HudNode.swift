@@ -10,7 +10,7 @@ import SpriteKit
 
 class HudNode: SKNode {
 //    private let scoreKey = "skater_highscore"
-    private let scoreNode = SKLabelNode(fontNamed: "Cmmic-ink")
+    private let scoreNode = SKLabelNode(fontNamed: "Comic-ink")
     private(set) var score: Int = 0
     private var highScore: Int = 0
     ///Defines if highest score is shown now.

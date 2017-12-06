@@ -123,9 +123,6 @@ public class HelicopterSprite: SKSpriteNode {
         //Stops helicopter from moving.
         removeAction(forKey: flyingActionKey)
         
-        //Plays helicopter hit by thunder music.
-        run( SKAction.playSoundFileNamed( "blast.mp3", waitForCompletion: true))//, withKey:
-        
         //Helicopter explosion action.
         let explosionNode = SKSpriteNode.init(imageNamed: "Boom1")
         explosionNode.position = position
@@ -140,5 +137,14 @@ public class HelicopterSprite: SKSpriteNode {
         explosionNode.removeAllActions()
         explosionNode.removeFromParent()
         explosionNode.physicsBody = nil
+        
+        
+        //Mutes if sound is off.
+        guard !SoundManager.sharedInstance.isMuted else {
+            return
+        }
+        
+        //Plays helicopter hit by thunder music.
+        run( SKAction.playSoundFileNamed( "blast.mp3", waitForCompletion: true))//, withKey:
     }
 }
