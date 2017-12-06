@@ -129,7 +129,11 @@ class MenuScene: SKScene {
     
     ///Handles start button behaviour.
     private func handleStartButtonCLick(){
-        print("Start was clicked")
+        let transition = SKTransition.reveal(with: .down, duration: 0.75)
+        let gameScene = GameScene(size: size)
+        gameScene.scaleMode = scaleMode
+        view?.presentScene(gameScene, transition: transition)
+    
     }
     
     ///Handles sound button behaviour.
