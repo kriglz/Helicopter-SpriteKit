@@ -9,7 +9,7 @@
 import SpriteKit
 
 class HudNode: SKNode {
-//    private let scoreKey = "skater_highscore"
+    
     private let scoreNode = SKLabelNode(fontNamed: "Comic-ink")
     private(set) var score: Int = 0
     private var highScore: Int = 0
@@ -17,6 +17,7 @@ class HudNode: SKNode {
     private var showsHighScore = false
     ///Defines if quit button is pressed.
     private(set) var quitButtonPressed = false
+    var quitButtonAction: (() -> ())?
     
     //Init of quit button.
     private var quitButton: SKSpriteNode!
@@ -117,8 +118,8 @@ class HudNode: SKNode {
     }
     
     func touchEndedAtPoint(point: CGPoint){
-        if quitButton.contains(point){
-            //TODO tell the game to quit the game
+        if quitButton.contains(point) && quitButtonAction != nil {
+            quitButtonAction!()
         }
         quitButton.texture = quitButtonTexture
     }

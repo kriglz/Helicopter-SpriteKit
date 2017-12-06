@@ -43,6 +43,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Addind score label.
         hudNode.setup(size: size)
+        hudNode.quitButtonAction = {
+            let transition = SKTransition.reveal(with: .up, duration: 0.75)
+            let gameScene = MenuScene(size: self.size)
+            gameScene.scaleMode = self.scaleMode
+            self.view?.presentScene(gameScene, transition: transition)
+            self.hudNode.quitButtonAction = nil
+        }
         addChild(hudNode)
         
         //Adding WorldFrame
